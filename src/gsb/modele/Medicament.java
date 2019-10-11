@@ -1,7 +1,7 @@
 package gsb.modele;
 
 public class Medicament {
-	protected String MedDepotLegal ;
+	protected String MedDepotLegal;
 	protected String MedNomCommercial;
 	protected String MedComposition;
 	protected String MedEffets;
@@ -9,6 +9,7 @@ public class Medicament {
 	protected Float MedPrixEchantillon;
 	protected String FamCode;
 	protected String FamLibelle;
+
 	/**
 	 * @param MedDepotLegal
 	 * @param MedNomCommercial
@@ -19,9 +20,8 @@ public class Medicament {
 	 * @param FamCode
 	 * @param FamLibelle
 	 */
-	public Medicament(String MedDepotLegal, String MedNomCommercial, String MedComposition,
-			String MedEffets, String MedContreIndic, Float MedPrixEchantillon,
-			String FamCode, String FamLibelle) {
+	public Medicament(String MedDepotLegal, String MedNomCommercial, String MedComposition, String MedEffets,
+			String MedContreIndic, Float MedPrixEchantillon, String FamCode, String FamLibelle) {
 		this.MedDepotLegal = MedDepotLegal;
 		this.MedNomCommercial = MedNomCommercial;
 		this.MedComposition = MedComposition;
@@ -31,54 +31,69 @@ public class Medicament {
 		this.FamCode = FamCode;
 		this.FamLibelle = FamLibelle;
 	}
+
 	public String getMedDepotLegal() {
 		return MedDepotLegal;
 	}
+
 	public void setMedDepotLegal(String medDepotLegal) {
 		MedDepotLegal = medDepotLegal;
 	}
+
 	public String getMedNomCommercial() {
 		return MedNomCommercial;
 	}
+
 	public void setMedNomCommercial(String medNomCommercial) {
 		MedNomCommercial = medNomCommercial;
 	}
+
 	public String getMedComposition() {
 		return MedComposition;
 	}
+
 	public void setMedComposition(String medComposition) {
 		MedComposition = medComposition;
 	}
+
 	public String getMedEffets() {
 		return MedEffets;
 	}
+
 	public void setMedEffets(String medEffets) {
 		MedEffets = medEffets;
 	}
+
 	public String getMedContreIndic() {
 		return MedContreIndic;
 	}
+
 	public void setMedContreIndic(String medContreIndic) {
 		MedContreIndic = medContreIndic;
 	}
+
 	public Float getMedPrixEchantillon() {
 		return MedPrixEchantillon;
 	}
+
 	public void setMedPrixEchantillon(Float medPrixEchantillon) {
 		MedPrixEchantillon = medPrixEchantillon;
 	}
+
 	public String getFamCode() {
 		return FamCode;
 	}
+
 	public void setFamCode(String famCode) {
 		FamCode = famCode;
 	}
+
 	public String getFamLibelle() {
 		return FamLibelle;
 	}
+
 	public void setFamLibelle(String famLibelle) {
 		FamLibelle = famLibelle;
 	}
-	
-	
+
 }
