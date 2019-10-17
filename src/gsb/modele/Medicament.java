@@ -6,7 +6,7 @@ public class Medicament {
 	protected String MedComposition;
 	protected String MedEffets;
 	protected String MedContreIndic;
-	protected Float MedPrixEchantillon;
+	protected String MedPrixEchantillon;
 	protected String FamCode;
 	protected String FamLibelle;
 
@@ -21,7 +21,7 @@ public class Medicament {
 	 * @param FamLibelle
 	 */
 	public Medicament(String MedDepotLegal, String MedNomCommercial, String MedComposition, String MedEffets,
-			String MedContreIndic, Float MedPrixEchantillon, String FamCode, String FamLibelle) {
+			String MedContreIndic, String MedPrixEchantillon, String FamCode, String FamLibelle) {
 		this.MedDepotLegal = MedDepotLegal;
 		this.MedNomCommercial = MedNomCommercial;
 		this.MedComposition = MedComposition;
@@ -72,11 +72,11 @@ public class Medicament {
 		MedContreIndic = medContreIndic;
 	}
 
-	public Float getMedPrixEchantillon() {
+	public String getMedPrixEchantillon() {
 		return MedPrixEchantillon;
 	}
 
-	public void setMedPrixEchantillon(Float medPrixEchantillon) {
+	public void setMedPrixEchantillon(String medPrixEchantillon) {
 		MedPrixEchantillon = medPrixEchantillon;
 	}
 
