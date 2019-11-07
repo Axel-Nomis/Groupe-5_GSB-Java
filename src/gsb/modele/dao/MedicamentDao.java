@@ -56,5 +56,39 @@ public class MedicamentDao {
 		}
 		return diccoDesMedicaments;
 	}
+	
+	public static int ajouterEchantillon(String uneQuantite, String matriculeVisiteur, String medDepotLegal) {
+		int retour = 0;
+		int quantiteEntier = 0;
+
+		// tests à effectuer
+		// tester l'existance du matricule visiteur dans la table visiteur
+		if (!retournerDictionnaireDesMedicaments().containsKey(medDepotLegal)) {
+			// Depot legal pas bon
+			System.out.println("Ce dépôt légal n'existe pas réessayez");
+			retour = -1;
+		} // else if() {
+			// Matricule Visiteur pas bon
+			// retour = -2;
+			// }
+		else if (uneQuantite != null) {
+			// Quantité existe mais pas convertible en int
+			try {
+				quantiteEntier = Integer.parseInt(uneQuantite);
+			} catch (Exception e) {
+				retour = -3;
+				System.out.println("erreur de conversion en entier");
+			}
+			
+		}
+		if (retour!=-1 && retour!=-2 && retour!=-3){
+			// On peut exécuter la requête si aucune des conditions précédentes n'a été bloqué
+			String requeteInsertion = "insert into STOCKER values(" + quantiteEntier + ",'" + matriculeVisiteur + "','"
+					+ medDepotLegal + "')";
+			retour = ConnexionMySql.execReqMaj(requeteInsertion);
+		}
+
+		return retour;
+	}
 
 }

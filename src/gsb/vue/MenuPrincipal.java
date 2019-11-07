@@ -108,6 +108,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFMedicamentCons());
 			}else if (ChoixOption.equals("Liste Medicaments")) {
 				ouvrirFenetre(new JIFMedicamentListeDic(this));
+			}else if (ChoixOption.equals("Ajout Medicaments")) {
+				ouvrirFenetre(new JIFMedicamentAjout());
 			}
 
 		}

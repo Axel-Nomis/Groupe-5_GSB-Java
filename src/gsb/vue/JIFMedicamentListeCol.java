@@ -45,7 +45,7 @@ public class JIFMedicamentListeCol extends JInternalFrame implements ActionListe
 			p = new JPanel(); // panneau principal de la fenêtre
 
 			int i=0;
-			String[][] data = new String[nbLignes][4] ;
+			String[][] data = new String[nbLignes][3] ;
 			for(Medicament unMedicament : lesMedicaments){
 				data[i][0] = unMedicament.getMedDepotLegal();
 				data[i][1] = unMedicament.getMedNomCommercial();
