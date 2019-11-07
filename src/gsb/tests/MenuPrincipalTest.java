@@ -3,10 +3,10 @@ package gsb.tests;
 import gsb.vue.*;
 
 public class MenuPrincipalTest {
-		public static void main (String[]args){
+	public static void main(String[] args) {
 
-			MenuPrincipal menu;
+		MenuPrincipal menu;
 
-			menu = new MenuPrincipal();
-		}
+		menu = new MenuPrincipal();
+	}
 }

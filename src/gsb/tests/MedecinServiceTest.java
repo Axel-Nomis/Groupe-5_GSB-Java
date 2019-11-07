@@ -10,10 +10,9 @@ import gsb.modele.Medecin;
 import gsb.service.MedecinService;
 
 /**
- * @author Isabelle
- * 23 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ * @author Isabelle 23 févr. 2015 TODO Pour changer le modèle de ce commentaire
+ *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
+ *         code - Modèles de code
  */
 public class MedecinServiceTest {
 
@@ -30,8 +29,6 @@ public class MedecinServiceTest {
 		System.out.println(unMedecin.getTelephone());
 		System.out.println(unMedecin.getPotentiel());
 		System.out.println(unMedecin.getSpecialite());
-		
-		
 
 	}
 

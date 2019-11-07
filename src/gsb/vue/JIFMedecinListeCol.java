@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -24,17 +23,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
- * @author Isabelle
- * 3 mars 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ * @author Isabelle 3 mars 2015 TODO Pour changer le modèle de ce commentaire de
+ *         type généré, allez à : Fenêtre - Préférences - Java - Style de code -
+ *         Modèles de code
  */
 public class JIFMedecinListeCol extends JInternalFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Medecin> lesMedecins;
-
 
 	protected JPanel p;
 	protected JScrollPane scrollPane;
@@ -52,27 +49,25 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 		int nbLignes = lesMedecins.size();
 
 		JTable table;
-		
-		
 
 		p = new JPanel(); // panneau principal de la fenêtre
 
-		int i=0;
-		String[][] data = new String[nbLignes][4] ;
-		for(Medecin unMedecin : lesMedecins){
+		int i = 0;
+		String[][] data = new String[nbLignes][4];
+		for (Medecin unMedecin : lesMedecins) {
 			data[i][0] = unMedecin.getCodeMed();
 			data[i][1] = unMedecin.getNom();
 			data[i][2] = unMedecin.getPrenom();
-			data[i][3] = unMedecin.getLaLocalite().getVille() ;
+			data[i][3] = unMedecin.getLaLocalite().getVille();
 			i++;
-			}
-		String[] columnNames = {"Code", "Nom","Prenom","Ville"};
+		}
+		String[] columnNames = { "Code", "Nom", "Prenom", "Ville" };
 		table = new JTable(data, columnNames);
-		
+
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(400, 200));
 		p.add(scrollPane);
-		
+
 		pSaisie = new JPanel();
 		JTcodeMedecin = new JTextField(20);
 		JTcodeMedecin.setMaximumSize(JTcodeMedecin.getPreferredSize());
@@ -81,23 +76,26 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 		pSaisie.add(JTcodeMedecin);
 		pSaisie.add(JBafficherFiche);
 		p.add(pSaisie);
-		
+
 		// mise en forme de la fenêtre
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
-   		if (source == JBafficherFiche){
-   			Medecin unMedecin = MedecinDao.rechercher(JTcodeMedecin.getText());
-   			if (unMedecin!=null){
-   	   			fenetreContainer.ouvrirFenetre(new JIFMedecinFiche(unMedecin));
-   			}
-   		}	
+		if (source == JBafficherFiche) {
+			Medecin unMedecin = MedecinDao.rechercher(JTcodeMedecin.getText());
+			if (unMedecin != null) {
+				fenetreContainer.ouvrirFenetre(new JIFMedecinFiche(unMedecin));
+			}
+		}
 	}
 }

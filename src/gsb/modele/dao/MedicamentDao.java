@@ -56,7 +56,7 @@ public class MedicamentDao {
 		}
 		return diccoDesMedicaments;
 	}
-	
+
 	public static int ajouterEchantillon(String uneQuantite, String matriculeVisiteur, String medDepotLegal) {
 		int retour = 0;
 		int quantiteEntier = 0;
@@ -67,27 +67,30 @@ public class MedicamentDao {
 			// Depot legal pas bon
 			System.out.println("Ce dépôt légal n'existe pas réessayez");
 			retour = -1;
-		} // else if() {
+		} else if (!VisiteurDao.retournerDictionnaireDesVisiteurs().containsKey(matriculeVisiteur)) {
 			// Matricule Visiteur pas bon
-			// retour = -2;
-			// }
-		else if (uneQuantite != null) {
-			// Quantité existe mais pas convertible en int
+			System.out.println("Ce matricule n'existe pas réessayez");
+			retour = -2;
+		} else if (uneQuantite != null) {
+			// Quantité existe
 			try {
+				//teste une conversion en int
 				quantiteEntier = Integer.parseInt(uneQuantite);
 			} catch (Exception e) {
 				retour = -3;
-				System.out.println("erreur de conversion en entier");
+				System.out.println("erreur de conversion en entier veuillez saisir un entier");
 			}
-			
 		}
-		if (retour!=-1 && retour!=-2 && retour!=-3){
-			// On peut exécuter la requête si aucune des conditions précédentes n'a été bloqué
+		if (retour != -1 && retour != -2 && retour != -3) {
+			// On peut exécuter la requête si aucune des conditions précédentes n'a été
+			// bloqué
 			String requeteInsertion = "insert into STOCKER values(" + quantiteEntier + ",'" + matriculeVisiteur + "','"
 					+ medDepotLegal + "')";
 			retour = ConnexionMySql.execReqMaj(requeteInsertion);
+			if (retour == 0) {
+				System.out.println("l'échantillon de ce médicament à déjà été fourni pour ce Visiteur");
+			}
 		}
-
 		return retour;
 	}
 

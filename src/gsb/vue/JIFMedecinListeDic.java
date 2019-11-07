@@ -40,9 +40,8 @@ public class JIFMedecinListeDic extends JInternalFrame implements ActionListener
 
 	private static final long serialVersionUID = 1L;
 
-	//private ArrayList<Medecin> lesMedecins;
-	private HashMap<String,Medecin> diccoMedecin;
-
+	// private ArrayList<Medecin> lesMedecins;
+	private HashMap<String, Medecin> diccoMedecin;
 
 	protected JPanel p;
 	protected JScrollPane scrollPane;
@@ -56,33 +55,33 @@ public class JIFMedecinListeDic extends JInternalFrame implements ActionListener
 
 		fenetreContainer = uneFenetreContainer;
 		// récupération des données Medecin dans la collection
-		//lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+		// lesMedecins = MedecinDao.retournerCollectionDesMedecins();
 
-		//int nbLignes = lesMedecins.size();
+		// int nbLignes = lesMedecins.size();
 		diccoMedecin = MedecinDao.retournerDictionnaireDesMedecins();
-		int nbLignes= diccoMedecin.size();
-		
+		int nbLignes = diccoMedecin.size();
+
 		p = new JPanel(); // panneau principal de la fenêtre
 
-		int i=0;
-		String[][] data = new String[nbLignes][4] ;
-		//for(Medecin unMedecin : lesMedecins){
-		
-		for (Map.Entry<String,Medecin> uneEntree : diccoMedecin.entrySet()){
+		int i = 0;
+		String[][] data = new String[nbLignes][4];
+		// for(Medecin unMedecin : lesMedecins){
+
+		for (Map.Entry<String, Medecin> uneEntree : diccoMedecin.entrySet()) {
 			data[i][0] = uneEntree.getValue().getCodeMed();
 			data[i][1] = uneEntree.getValue().getNom();
 			data[i][2] = uneEntree.getValue().getPrenom();
-			data[i][3] = uneEntree.getValue().getLaLocalite().getVille() ;
+			data[i][3] = uneEntree.getValue().getLaLocalite().getVille();
 			i++;
-			}
-		String[] columnNames = {"Code", "Nom","Prenom","Ville"};
+		}
+		String[] columnNames = { "Code", "Nom", "Prenom", "Ville" };
 		table = new JTable(data, columnNames);
 		table.getSelectionModel().addListSelectionListener(table);
-		
+
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(400, 200));
 		p.add(scrollPane);
-		
+
 		pSaisie = new JPanel();
 		JTcodeMedecin = new JTextField(20);
 		JTcodeMedecin.setMaximumSize(JTcodeMedecin.getPreferredSize());
@@ -91,27 +90,30 @@ public class JIFMedecinListeDic extends JInternalFrame implements ActionListener
 		pSaisie.add(JTcodeMedecin);
 		pSaisie.add(JBafficherFiche);
 		p.add(pSaisie);
-		
+
 		// mise en forme de la fenêtre
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
-   		if (source == JBafficherFiche){
-   			if (diccoMedecin.containsKey(JTcodeMedecin.getText())){
-   	   			Medecin unMedecin = diccoMedecin.get(JTcodeMedecin.getText());
-   	   			fenetreContainer.ouvrirFenetre(new JIFMedecinFiche(unMedecin));
-   			}
-   		}
-   		if(source == table){
-   			JTcodeMedecin.setText((String)table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
-   			
-   		}
+		if (source == JBafficherFiche) {
+			if (diccoMedecin.containsKey(JTcodeMedecin.getText())) {
+				Medecin unMedecin = diccoMedecin.get(JTcodeMedecin.getText());
+				fenetreContainer.ouvrirFenetre(new JIFMedecinFiche(unMedecin));
+			}
+		}
+		if (source == table) {
+			JTcodeMedecin.setText((String) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
+
+		}
 	}
 }

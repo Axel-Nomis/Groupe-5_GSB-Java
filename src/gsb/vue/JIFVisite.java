@@ -113,7 +113,8 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 			if (uneVisite != null) {
 				// Boîte du message d'information
 				boite_dialogue = new JOptionPane();
-				boite_dialogue.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+				boite_dialogue.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 

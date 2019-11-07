@@ -14,10 +14,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
- * @author Isabelle
- * 23 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ * @author Isabelle 23 févr. 2015 TODO Pour changer le modèle de ce commentaire
+ *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
+ *         code - Modèles de code
  */
 public class ConnexionTest {
 
@@ -26,12 +25,10 @@ public class ConnexionTest {
 	 */
 	public static void main(String[] args) {
 		// TODO Raccord de méthode auto-généré
-		ResultSet resultat = ConnexionMySql
-				.execReqSelection("select * from LOCALITE");
+		ResultSet resultat = ConnexionMySql.execReqSelection("select * from LOCALITE");
 		try {
 			while (resultat.next()) {
-				System.out.println(resultat.getString(1) + "  "
-						+ resultat.getString(2));
+				System.out.println(resultat.getString(1) + "  " + resultat.getString(2));
 			}
 			;
 			System.out.println("fin");
@@ -42,5 +39,3 @@ public class ConnexionTest {
 	}
 
 }
-
-

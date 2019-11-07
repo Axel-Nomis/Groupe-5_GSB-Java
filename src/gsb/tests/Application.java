@@ -9,10 +9,9 @@ package gsb.tests;
 import gsb.vue.MenuPrincipal;
 
 /**
- * @author Isabelle
- * 22 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ * @author Isabelle 22 févr. 2015 TODO Pour changer le modèle de ce commentaire
+ *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
+ *         code - Modèles de code
  */
 public class Application {
 
