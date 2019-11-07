@@ -5,19 +5,19 @@ import java.sql.Date;
 public class Visite {
 	
 	protected String reference;
-	protected Date dateVisite;
+	protected String dateVisite;
 	protected String commentaire;
-	protected Visiteur unVisiteur;
-	protected Medecin unMedecin;
+	protected String matricule;
+	protected String code;
 	
 	
 	
-	public Visite(String reference, Date dateVisite, String commentaire,Visiteur unVisiteur, Medecin unMedecin) {
+	public Visite(String reference, String dateVisite, String commentaire,String matricule, String code) {
 		this.reference = reference;
 		this.dateVisite = dateVisite;
 		this.commentaire = commentaire;
-		this.unVisiteur = unVisiteur;
-		this.unMedecin = unMedecin;
+		this.matricule = matricule;
+		this.code = code;
 	}
 
 
@@ -34,13 +34,13 @@ public class Visite {
 
 
 
-	public Date getDateVisite() {
+	public String getDateVisite() {
 		return dateVisite;
 	}
 
 
 
-	public void setDateVisite(Date dateVisite) {
+	public void setDateVisite(String dateVisite) {
 		this.dateVisite = dateVisite;
 	}
 
@@ -56,28 +56,29 @@ public class Visite {
 		this.commentaire = commentaire;
 	}
 
+	
 
 
-	public Visiteur getVisiteur() {
-		return unVisiteur;
+	public String getMatricule() {
+		return matricule;
 	}
 
 
 
-	public void setVisiteur(Visiteur unVisiteur) {
-		this.unVisiteur = unVisiteur;
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
 
 
-	public Medecin getMedecin() {
-		return unMedecin;
+	public String getCode() {
+		return code;
 	}
 
 
 
-	public void setMedecin(Medecin unMedecin) {
-		this.unMedecin = unMedecin;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

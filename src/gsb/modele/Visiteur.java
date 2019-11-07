@@ -11,14 +11,13 @@ public class Visiteur {
 	protected String mdp;
 	protected String adresse;
 	protected String telephone;
-	protected Date date_entree;
-	protected int prime;
+	protected String date_entree;
 	
 	
 	
 	
 	public Visiteur(String matricule, String nom, String prenom, String login, String mdp, String adresse,
-			String telephone, Date date_entree, int prime) {
+			String telephone, String date_entree) {
 		this.matricule = matricule;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -27,7 +26,6 @@ public class Visiteur {
 		this.adresse = adresse;
 		this.telephone = telephone;
 		this.date_entree = date_entree;
-		this.prime = prime;
 	}
 
 
@@ -131,31 +129,17 @@ public class Visiteur {
 
 
 
-	public Date getDate_entree() {
+	public String getDate_entree() {
 		return date_entree;
 	}
 
 
 
 
-	public void setDate_entree(Date date_entree) {
+	public void setDate_entree(String date_entree) {
 		this.date_entree = date_entree;
 	}
 
-
-
-
-	public int getPrime() {
-		return prime;
-	}
-
-
-
-
-	public void setPrime(int prime) {
-		this.prime = prime;
-	}
-	
 	
 
 }
