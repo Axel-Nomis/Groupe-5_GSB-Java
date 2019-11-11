@@ -5,6 +5,7 @@ import gsb.modele.Visite;
 import gsb.modele.dao.MedecinDao;
 import gsb.modele.dao.VisiteDao;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class JIFVisite extends JInternalFrame implements ActionListener {
+public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 
 	/**
 	 * Commentaire pour <code>serialVersionUID</code>
@@ -25,9 +26,7 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	protected JPanel p;
 	protected JPanel pTexte;
-	protected JPanel pBoutons;
-	protected JButton JBajouterVisite;
-
+	
 	protected JLabel JLreference;
 	protected JLabel JLdateVisite;
 	protected JLabel JLcommentaire;
@@ -40,17 +39,19 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 	protected JTextField JTmatricule;
 	protected JTextField JTcode;
 
-	public JIFVisite() {
+	public JIFVisiteCons() {
 
 		p = new JPanel(); // panneau principal de la fenêtre
-		pBoutons = new JPanel(); // panneau supportant les boutons
 		pTexte = new JPanel(new GridLayout(9, 2));
+		pTexte = new JPanel (new BorderLayout(4,4));
 
-		JLreference = new JLabel("Référence");
+		JLreference = new JLabel("<html> Référence <br>  </html> ");
+		
 		JLdateVisite = new JLabel("Date Visite");
+		JLmatricule = new JLabel("Matricule Visiteur");
+		JLcode = new JLabel("Code Médecin");		
+
 		JLcommentaire = new JLabel("Commentaire");
-		JLmatricule = new JLabel("Code visiteur");
-		JLcode = new JLabel("Code Médecin");
 
 		JTreference = new JTextField(20);
 		JTreference.setMaximumSize(JTreference.getPreferredSize());
@@ -58,9 +59,6 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 		JTcommentaire = new JTextField();
 		JTmatricule = new JTextField();
 		JTcode = new JTextField();
-
-		JBajouterVisite = new JButton("Ajouter");
-		JBajouterVisite.addActionListener(this);
 
 		pTexte.add(JLreference);
 		pTexte.add(JTreference);
@@ -73,12 +71,10 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 		pTexte.add(JLcode);
 		pTexte.add(JTcode);
 
-		pBoutons.add(JBajouterVisite);
 
 		// mise en forme de la fenêtre
 
 		p.add(pTexte);
-		p.add(pBoutons);
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 	}
@@ -106,17 +102,8 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 		JOptionPane boite_dialogue;
 		// TODO Auto-generated method stub
 		Object source = e.getSource();
-		if (source == JBajouterVisite) {
-			Visite uneVisite = new Visite(JTreference.getText(), JTdateVisite.getText(), JTcommentaire.getText(),
-					JTmatricule.getText(), JTcode.getText());
-			VisiteDao.ajouter(uneVisite);
-			if (uneVisite != null) {
-				// Boîte du message d'information
-				boite_dialogue = new JOptionPane();
-				boite_dialogue.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
-			}
 		}
 
-	}
+	
 
 }
