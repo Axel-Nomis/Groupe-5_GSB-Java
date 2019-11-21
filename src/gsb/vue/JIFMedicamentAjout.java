@@ -2,14 +2,18 @@ package gsb.vue;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class JIFMedicamentAjout extends JInternalFrame {
+import gsb.modele.dao.MedicamentDao;
+
+public class JIFMedicamentAjout extends JInternalFrame implements ActionListener {
 	/**
 	 * Commentaire pour <code>serialVersionUID</code>
 	 */
@@ -50,6 +54,7 @@ public class JIFMedicamentAjout extends JInternalFrame {
 
 		pSaisie = new JPanel();
 		JBajout = new JButton("Ajouter Echantillon");
+		JBajout.addActionListener(this);
 
 		// mise en forme de la fenêtre
 
@@ -59,6 +64,38 @@ public class JIFMedicamentAjout extends JInternalFrame {
 		Container contentPane = getContentPane();
 		contentPane.add(p);
 
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		Object source = arg0.getSource();
+		if (source == JBajout) {
+			int test = MedicamentDao.ajouterEchantillon(JTQuantite.getText(), JTCodeVisiteur.getText(),
+					JTDepotLegal.getText());
+
+			if (test == 1) {
+				// afficher réussite
+				JOptionPane.showMessageDialog(null, "c'est bon", "Information", JOptionPane.INFORMATION_MESSAGE);
+			}
+			if (test == 0) {
+				// afficher échec
+				JOptionPane.showMessageDialog(null, "l'échantillon de ce médicament à déjà été fourni pour ce Visiteur", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+			if (test == -1) {
+				// afficher ce dépôt légal n'existe pas réessayez
+				JOptionPane.showMessageDialog(null, "ce dépôt légal n'existe pas réessayez", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			if (test == -2) {
+				// afficher ce matricule n'existe pas réessayez
+				JOptionPane.showMessageDialog(null, "ce matricule n'existe pas réessayez", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			if (test == -3) {
+				// afficher erreur de conversion en entier veuillez saisir un entier
+				JOptionPane.showMessageDialog(null, "erreur de conversion en entier veuillez saisir un entier",
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 }
