@@ -47,14 +47,12 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 
 	protected JPanel p;
 	protected JPanel q;
-	protected JScrollPane scrollPane;
-	protected JPanel pSaisie;
-	protected JButton JBafficherFiche;
+	protected JScrollPane scrollPane;	
 	protected MenuPrincipal fenetreContainer;
 
 	protected JPanel pTexte;
-	protected JPanel qTexte;
-	protected JPanel pBoutons;
+	protected JPanel pSaisie;
+	protected JButton JBafficherFiche;
 
 	protected JLabel JLmatricule;
 	protected JLabel JLdateVisite;
@@ -98,18 +96,18 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 		
 		
 		int i=0;
-		String[][] data = new String[nbLignes][2] ;
+		String[][] data = new String[nbLignes][3] ;
 		for(Visite uneVisite : lesVisites){
 			data[i][0] = uneVisite.getReference();
 			data[i][1] = uneVisite.getDateVisite();
-			//data[i][2] = uneVisite.getPrenom();
+			data[i][2] = MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille();
 			i++;
 			}
-		String[] columnNames = {"Référence", "Code médecin"};
+		String[] columnNames = {"Référence", "Code médecin", "Lieu"};
 		table = new JTable(data, columnNames);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(400, 200));
+		scrollPane.setPreferredSize(new Dimension(450, 200));
 		p.add(scrollPane);
 
 		
@@ -126,14 +124,18 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 		Container contentPane3 = getContentPane();
 		contentPane3.add(q);*/
 
+		pTexte = new JPanel();
 		pSaisie = new JPanel();
 		JLreference = new JLabel("Référence");
-		JTreference = new JTextField(20);
+		JTreference = new JTextField(10);
 		JTreference.setMaximumSize(JTreference.getPreferredSize());
 		JBafficherFiche = new JButton("Visite détaillé");
 		JBafficherFiche.addActionListener(this); // source d'évenement
+		pTexte.add(JLreference);
 		pSaisie.add(JTreference);
 		pSaisie.add(JBafficherFiche);
+		
+		p.add(pTexte);
 		p.add(pSaisie);
 
 		

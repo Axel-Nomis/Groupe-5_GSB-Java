@@ -36,8 +36,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenuBar mbar;
 	protected JMenu mMedecins;
 	protected JMenu mMedicaments;
-
-	JMenu mVisites;
+	protected JMenu mVisites;
 
 	/**
 	 * 
@@ -68,12 +67,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mE1 = new JMenuItem("Consultation Medicament");
 		mE1.addActionListener(this); // installation d'un écouteur d'action
 		mMedicaments.add(mE1);
-		JMenuItem mE2 = new JMenuItem("Liste Medicaments");
+		JMenuItem mE2 = new JMenuItem("Ajout Medicaments");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
-		JMenuItem mE3 = new JMenuItem("Ajout Medicaments");
-		mE3.addActionListener(this);
-		mMedicaments.add(mE3);
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
@@ -102,18 +98,15 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				ouvrirFenetre(new JIFMedecinCons());
 
 			} else if (ChoixOption.equals("Liste Medecins")) {
-				ouvrirFenetre(new JIFMedecinListeDic(this));
-			} else if (ChoixOption.equals("Consultation Medicament")) {
-				// Creation d'une sous-fenêtre
-				ouvrirFenetre(new JIFMedicamentCons());
-			} else if (ChoixOption.equals("Liste Medicaments")) {
-				ouvrirFenetre(new JIFMedicamentListeDic(this));
-			} else if (ChoixOption.equals("Ajout Medicaments")) {
-				ouvrirFenetre(new JIFMedicamentAjout());
+				//ouvrirFenetre(new JIFMedecinListeDic(this));
+				ouvrirFenetre(new JIFMedecinListeCol(this));
+				
 			} else if (ChoixOption.equals("Consultation Visite")) {
 				ouvrirFenetre(new JIFVisiteListe(this));
+				
 			} else if (ChoixOption.equals("Ajout Visite")) {
-				ouvrirFenetre(new JIFVisite());
+				ouvrirFenetre(new JIFVisiteAjout());
+				
 			}
 
 		}
@@ -128,7 +121,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		myJInternalFrame.setSize(480, 380);
+		myJInternalFrame.setSize(500, 400);
 		desktopPane.add(myJInternalFrame);
 	}
 

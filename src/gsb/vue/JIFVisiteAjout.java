@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class JIFVisite extends JInternalFrame implements ActionListener {
+public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 	/**
 	 * Commentaire pour <code>serialVersionUID</code>
@@ -40,7 +40,7 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 	protected JTextField JTmatricule;
 	protected JTextField JTcode;
 
-	public JIFVisite() {
+	public JIFVisiteAjout() {
 
 		p = new JPanel(); // panneau principal de la fenêtre
 		pBoutons = new JPanel(); // panneau supportant les boutons
