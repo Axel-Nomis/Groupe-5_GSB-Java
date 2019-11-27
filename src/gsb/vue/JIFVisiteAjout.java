@@ -46,11 +46,11 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 		pBoutons = new JPanel(); // panneau supportant les boutons
 		pTexte = new JPanel(new GridLayout(9, 2));
 
-		JLreference = new JLabel("Référence");
-		JLdateVisite = new JLabel("Date Visite");
+		JLreference = new JLabel("Référence *");
+		JLdateVisite = new JLabel("Date Visite *");
 		JLcommentaire = new JLabel("Commentaire");
-		JLmatricule = new JLabel("Code visiteur");
-		JLcode = new JLabel("Code Médecin");
+		JLmatricule = new JLabel("Matricule Visiteur *");
+		JLcode = new JLabel("Code Médecin *");
 
 		JTreference = new JTextField(20);
 		JTreference.setMaximumSize(JTreference.getPreferredSize());
@@ -103,18 +103,67 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane boite_dialogue;
 		// TODO Auto-generated method stub
 		Object source = e.getSource();
 		if (source == JBajouterVisite) {
-			Visite uneVisite = new Visite(JTreference.getText(), JTdateVisite.getText(), JTcommentaire.getText(),
-					JTmatricule.getText(), JTcode.getText());
-			VisiteDao.ajouter(uneVisite);
-			if (uneVisite != null) {
-				// Boîte du message d'information
-				boite_dialogue = new JOptionPane();
-				boite_dialogue.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+			
+			String ref = JTreference.getText();
+			String dateV = JTdateVisite.getText();
+			String comm = JTcommentaire.getText();
+			String mat = JTmatricule.getText();
+			String code = JTcode.getText();
+			
+			int echo = VisiteDao.ajouter(ref, dateV, comm, mat, code);
+			
+			
+			switch(echo) {
+			
+			case -1:
+				JOptionPane.showMessageDialog(null, "Vous avez oublié de référencé un ou plusieurs champ(s).", "¡¡¡ Attention !!!", JOptionPane.PLAIN_MESSAGE);
+				break;
+			
+			case 0:
+				JOptionPane.showMessageDialog(null, "Cette Visite existe déja !", "Attention", JOptionPane.WARNING_MESSAGE);
+				break;
+			
+			case 1:
+				JOptionPane.showMessageDialog(null, "Votre Visite à bien été prise en compte !.", "Information", JOptionPane.INFORMATION_MESSAGE);
+				break;
+			
+			case 2:
+				JOptionPane.showMessageDialog(null, "La référence doit être de 5 caractères 1 lettre, suivi de 4 chiffres (ex: v1111).", "¡¡¡ Attention !!!", JOptionPane.WARNING_MESSAGE);
+				break;
+			
+			case 3:
+				JOptionPane.showMessageDialog(null, "La référence doit commencer par la lettre 'v', pour signifier que c'est une Visite.", "¡¡¡ Attention !!!", JOptionPane.QUESTION_MESSAGE);
+				break;
+				
+			case 4:
+				JOptionPane.showMessageDialog(null, "La référene doit contenir 4 chiffres après le v", "Erreur", JOptionPane.ERROR_MESSAGE);
+				break;
+				
+			case 5:
+				JOptionPane.showMessageDialog(null, "Problème de conversion, la date ne doit contenir que des chiffres", "Erreur", JOptionPane.ERROR_MESSAGE);
+				break;
+				
+			case 6:
+				JOptionPane.showMessageDialog(null, "La date n'est pas entrée sous le bon format, "
+						+ "qui doit être celui-ci : JJ/MM/AAAA  HH:MM:SS", "Attention", JOptionPane.WARNING_MESSAGE);
+				break;	
+				
+			
+			case 7:
+				JOptionPane.showMessageDialog(null, "Le matricule du Visiteur n'existe pas dans la base", "Erreur", JOptionPane.ERROR_MESSAGE);
+				break;
+				
+				
+			case 8:
+				JOptionPane.showMessageDialog(null, "Le code du Médecin n'existe pas dans la base", "Erreur", JOptionPane.ERROR_MESSAGE);
+				break;
+				
 			}
+			
+			
 		}
 
 	}
