@@ -1,5 +1,6 @@
 package gsb.modele.dao;
 
+
 /*
  * Créé le 23 sept. 2014
  *
@@ -12,89 +13,80 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
- * @author Isabelle 23 sept. 2014 TODO Pour changer le modèle de ce commentaire
- *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
- *         code - Modèles de code
+ * @author Isabelle
+ * 23 sept. 2014
+ * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
+ * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 public class ConnexionMySql { // DAO = Data Access Object
-
+	
 	static Connection cnx;
-
-	public ConnexionMySql() {
+	
+	public ConnexionMySql(){
 		cnx = null;
 	}
-
+	
 	/**
-	 * methode qui permet la connexion à la base de données le fait que la méthode
-	 * soit static permet d'éviter d'instancier dans une classe un objet
-	 * ConnexioMySql pour utiliser cette méthode écrire :
-	 * ConnexionMySql.connecterBd()
+	 * methode qui permet la connexion à la base de données
+	 * le fait que la méthode soit static permet d'éviter d'instancier dans une classe un objet ConnexioMySql
+	 * pour utiliser cette méthode écrire : ConnexionMySql.connecterBd()
 	 */
-	public static void connecterBd() {
-		// connexion à la base de donnée à partir de jdbc
-		String url = "jdbc:mysql://localhost:3306/gsbV2"; // url : chaine de connexion
+	public static void connecterBd(){
+		//connexion à la base de donnée à partir de jdbc
+		//String url = "jdbc:mysql://192.175.1.13:3306/gsbV2"; // url : chaine de connexion
+		String url = "jdbc:mysql://localhost:3306/GSB_JAVA";
 		// try permet d'essayer de lancer la connexion
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			cnx = DriverManager.getConnection(url, "root", "");
-		}
+		try {Class.forName("com.mysql.jdbc.Driver"); 
+			//cnx = DriverManager.getConnection(url,"admindb","password");
+			cnx = DriverManager.getConnection(url,"root",""); 
+		} 
 		// si la connexion echoue un message d'erreur est affiché
-		catch (Exception e) {
-			System.out.println("Echec lors de la connexion");
-		}
+        catch(Exception e) {  System.out.println("Echec lors de la connexion");  } 
 
 	}
-
+	
 	/**
 	 * @param laRequete requête SQL de type SELECT
-	 * @return un curseur qui contient les lignes obtenues lors de l'exécution de la
-	 *         requête, null sinon pour utiliser cette méthode écrire :
-	 *         ConnexionMySql.execReqSelection(uneRequete) où uneRequête est de type
-	 *         String
+	 * @return un curseur qui contient les lignes obtenues lors de l'exécution de la requête, null sinon
+	 * pour utiliser cette méthode écrire : ConnexionMySql.execReqSelection(uneRequete) où uneRequête est de type String
 	 */
-	public static ResultSet execReqSelection(String laRequete) {
+	public static ResultSet execReqSelection(String laRequete){ 
 		connecterBd();
 		ResultSet resultatReq = null;
 		try {
-			Statement requete = cnx.createStatement();
-			resultatReq = requete.executeQuery(laRequete);
-		} catch (Exception e) {
-			System.out.println("Erreur requete : " + laRequete);
-		}
-		return resultatReq;
+				Statement requete = cnx.createStatement(); 
+				resultatReq =requete.executeQuery(laRequete); 
+		} 
+		catch(Exception e) {  System.out.println("Erreur requete : "+laRequete);  }
+		return resultatReq;	
 	}
-
+	
 	/**
 	 * @param laRequete requête SQL de type INSERT, UPDATE ou DELETE
-	 * @return 1 si la MAJ s'est bien déroulée, 0 sinon pour utiliser cette méthode
-	 *         écrire : ConnexionMySql.execReqMaj(uneRequete) où uneRequête est de
-	 *         type String
+	 * @return 1 si la MAJ s'est bien déroulée, 0 sinon
+	 * pour utiliser cette méthode écrire : ConnexionMySql.execReqMaj(uneRequete) où uneRequête est de type String
 	 */
-	public static int execReqMaj(String laRequete) {
+	public static int execReqMaj(String laRequete){
 		connecterBd();
-		int nbMaj = 0;
+		int nbMaj =0;
 		try {
-			Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			nbMaj = s.executeUpdate(laRequete);
-			s.close();
-		} catch (Exception er) {
-			er.printStackTrace();
-			System.out.println("echec requête : " + laRequete);
-		}
-		return nbMaj;
+		Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        nbMaj = s.executeUpdate(laRequete);
+        s.close();}
+		catch (Exception er) {
+			er.printStackTrace(); 
+			System.out.println("echec requête : "+laRequete); }
+		return nbMaj;       
 	}
-
+	
 	/**
-	 * attention : tant que la connexion n'est pas fermée, les MAJ ne sont pas
-	 * effectives, on reste en mode déconnecté pour utiliser cette méthode écrire :
-	 * ConnexionMySql.fermerConnexionBd()
+	 * attention : tant que la connexion n'est pas fermée, 
+	 * les MAJ ne sont pas effectives, on reste en mode déconnecté
+	 * pour utiliser cette méthode écrire : ConnexionMySql.fermerConnexionBd()
 	 */
-	public static void fermerConnexionBd() {
-		try {
-			cnx.close();
-		} catch (Exception e) {
-			System.out.println("Erreur sur fermeture connexion");
-		}
+	public static void fermerConnexionBd(){
+		try{cnx.close();}
+		catch(Exception e) {  System.out.println("Erreur sur fermeture connexion");  } 
 	}
 
 }

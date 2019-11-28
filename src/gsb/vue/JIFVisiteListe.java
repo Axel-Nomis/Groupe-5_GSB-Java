@@ -111,18 +111,7 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener {
 		p.add(scrollPane);
 
 		
-		
 
-		/*q = new JPanel();
-		qTexte = new JPanel(new GridLayout(3, 2));
-		JLreference = new JLabel("Référence");
-		JTreference = new JTextField();
-		qTexte.add(JLreference);
-		qTexte.add(JTreference);
-
-		q.add(qTexte);
-		Container contentPane3 = getContentPane();
-		contentPane3.add(q);*/
 
 		pTexte = new JPanel();
 		pSaisie = new JPanel();

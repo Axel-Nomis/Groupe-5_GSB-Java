@@ -100,6 +100,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			} else if (ChoixOption.equals("Liste Medecins")) {
 				//ouvrirFenetre(new JIFMedecinListeDic(this));
 				ouvrirFenetre(new JIFMedecinListeCol(this));
+			
+			} else if (ChoixOption.equals("Consultation Medicament")) {
+				//ouvrirFenetre(new JIFMedecinListeDic(this));
+				ouvrirFenetre(new JIFMedicamentCons());
+			
+			} else if (ChoixOption.equals("Ajout Medicament")) {
+				//ouvrirFenetre(new JIFMedecinListeDic(this));
+				ouvrirFenetre(new JIFMedecinListeCol(this));
 				
 			} else if (ChoixOption.equals("Consultation Visite")) {
 				ouvrirFenetre(new JIFVisiteListe(this));

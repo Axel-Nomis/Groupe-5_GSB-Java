@@ -10,7 +10,7 @@ public class VisiteurServiceTest {
 	
 	
 	public static void main(String[] args) {
-		Visiteur unVisiteur = VisiteurService.rechercherVisiteur("a131");
+		Visiteur unVisiteur = VisiteurService.rechercherVisite("a131");
 		
 	
 		System.out.println(unVisiteur.getNom());

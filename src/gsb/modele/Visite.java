@@ -7,17 +7,19 @@ public class Visite {
 	protected String reference;
 	protected String dateVisite;
 	protected String commentaire;
-	protected String matricule;
-	protected String code;
+	protected String matriculeVisit;
+	protected String codeMed;
 
-	public Visite(String reference, String dateVisite, String commentaire, String matricule, String code) {
+	public Visite(String reference, String dateVisite, String commentaire, String matriculeVisit, String codeMed) {
 		this.reference = reference;
 		this.dateVisite = dateVisite;
 		this.commentaire = commentaire;
-		this.matricule = matricule;
-		this.code = code;
+		this.matriculeVisit = matriculeVisit;
+		this.codeMed = codeMed;
 	}
 
+	
+	
 	public String getReference() {
 		return reference;
 	}
@@ -42,20 +44,20 @@ public class Visite {
 		this.commentaire = commentaire;
 	}
 
-	public String getMatricule() {
-		return matricule;
+	public String getMatriculeVisit() {
+		return matriculeVisit;
 	}
 
-	public void setMatricule(String matricule) {
-		this.matricule = matricule;
+	public void setMatriculeVisit(String matriculeVisit) {
+		this.matriculeVisit = matriculeVisit;
 	}
 
-	public String getCode() {
-		return code;
+	public String getCodeMed() {
+		return codeMed;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCodeMed(String codeMed) {
+		this.codeMed = codeMed;
 	}
 
 }

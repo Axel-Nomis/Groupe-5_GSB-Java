@@ -119,7 +119,7 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener {
 			switch(echo) {
 			
 			case -1:
-				JOptionPane.showMessageDialog(null, "Vous avez oublié de référencé un ou plusieurs champ(s).", "¡¡¡ Attention !!!", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Vous avez oublié de référencer un ou plusieurs champ(s).", "¡¡¡ Attention !!!", JOptionPane.ERROR_MESSAGE);
 				break;
 			
 			case 0:

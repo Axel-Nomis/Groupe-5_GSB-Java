@@ -107,14 +107,27 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		Object source = e.getSource();
 		if (source == JBajouterVisite) {
-			Visite uneVisite = new Visite(JTreference.getText(), JTdateVisite.getText(), JTcommentaire.getText(),
-					JTmatricule.getText(), JTcode.getText());
-			VisiteDao.ajouter(uneVisite);
-			if (uneVisite != null) {
+			/*Visite uneVisite = new Visite(JTreference.getText(), JTdateVisite.getText(), JTcommentaire.getText(),
+					JTmatricule.getText(), JTcode.getText());*/
+			
+			String ref = JTreference.getText();
+			String dateV = JTdateVisite.getText();
+			String comm = JTcommentaire.getText();
+			String mat = JTmatricule.getText();
+			String code = JTcode.getText();
+			VisiteDao.ajouter(ref, dateV, comm, mat, code);
+			
+			if (VisiteDao.ajouter(ref, dateV, comm, mat, code) == 1) {
 				// Boîte du message d'information
-				boite_dialogue = new JOptionPane();
-				boite_dialogue.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+				
+				
+				JOptionPane.showMessageDialog(null, "Le matricule du Visiteur n'existe pas dans la base", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}
+			
+			
+			
+			
 		}
 
 	}

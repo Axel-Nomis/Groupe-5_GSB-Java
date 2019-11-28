@@ -99,7 +99,6 @@ public class JIFVisiteCons extends JInternalFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane boite_dialogue;
 		// TODO Auto-generated method stub
 		Object source = e.getSource();
 		}
