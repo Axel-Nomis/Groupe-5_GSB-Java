@@ -1,23 +1,23 @@
 package gsb.vue;
 
-import gsb.modele.Medecin;
 import gsb.modele.Visite;
-import gsb.modele.dao.MedecinDao;
-import gsb.modele.dao.VisiteDao;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class JIFVisite extends JInternalFrame implements ActionListener {
+	/**
+	 * 
+	 * @author Marull
+	 *
+	 */
+
+public class JIFVisite extends JInternalFrame {
 
 	/**
 	 * Commentaire pour <code>serialVersionUID</code>
@@ -25,8 +25,16 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	protected JPanel p;
 	protected JPanel pTexte;
+	protected JPanel oTexte;
+	
+	
 	protected JPanel pBoutons;
+	protected JPanel pSaisie;
 	protected JButton JBajouterVisite;
+	protected JButton JBannulerVisite;
+	protected JButton JBafficherLigne;
+	protected JButton JBafficherFiche;
+	
 
 	protected JLabel JLreference;
 	protected JLabel JLdateVisite;
@@ -41,46 +49,41 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 	protected JTextField JTcode;
 
 	public JIFVisite() {
+		
+		p = new JPanel(); 									// panneau principal de la fenêtre
+		pBoutons = new JPanel(); 							// panneau supportant les boutons
+		pTexte = new JPanel(new GridLayout(9, 2));			// création d'une grille
+		oTexte = new JPanel(new GridLayout(4, 3));
+		
+		
 
-		p = new JPanel(); // panneau principal de la fenêtre
-		pBoutons = new JPanel(); // panneau supportant les boutons
-		pTexte = new JPanel(new GridLayout(9, 2));
+		JLreference = new JLabel("Référence* :");			// initialisation des labels qui seront utilisés par les autres classe JIF
+		JLdateVisite = new JLabel("Date Visite* :");
+		JLcommentaire = new JLabel("Commentaire* :");
+		JLmatricule = new JLabel("Matricule visiteur* :");
+		JLcode = new JLabel("Code médecin* :");
 
-		JLreference = new JLabel("Référence");
-		JLdateVisite = new JLabel("Date Visite");
-		JLcommentaire = new JLabel("Commentaire");
-		JLmatricule = new JLabel("Code visiteur");
-		JLcode = new JLabel("Code Médecin");
-
-		JTreference = new JTextField(20);
+		JTreference = new JTextField(20);					// initialisation des zones de textes qui seront utilisés par les autres classe JIF
 		JTreference.setMaximumSize(JTreference.getPreferredSize());
 		JTdateVisite = new JTextField();
 		JTcommentaire = new JTextField();
 		JTmatricule = new JTextField();
 		JTcode = new JTextField();
 
-		JBajouterVisite = new JButton("Ajouter");
-		JBajouterVisite.addActionListener(this);
-
-		pTexte.add(JLreference);
-		pTexte.add(JTreference);
-		pTexte.add(JLdateVisite);
-		pTexte.add(JTdateVisite);
-		pTexte.add(JLcommentaire);
-		pTexte.add(JTcommentaire);
-		pTexte.add(JLmatricule);
-		pTexte.add(JTmatricule);
-		pTexte.add(JLcode);
-		pTexte.add(JTcode);
-
-		pBoutons.add(JBajouterVisite);
-
-		// mise en forme de la fenêtre
-
+		
+		JBajouterVisite = new JButton("Ajouter");			// initialisation des différents bouttons
+		JBannulerVisite = new JButton("Annuler");
+		JBafficherLigne = new JButton("Filtrer");
+		JBafficherFiche = new JButton("Visite détaillé");
+		
+		
 		p.add(pTexte);
+		p.add(oTexte);
 		p.add(pBoutons);
-		Container contentPane = getContentPane();
+		
+		Container contentPane = getContentPane();			// mise en forme de la fenêtre
 		contentPane.add(p);
+		
 	}
 
 	public void remplirText(Visite uneVisite) { // méthode qui permet de remplir les zones de texte à partir des valeurs
@@ -101,35 +104,5 @@ public class JIFVisite extends JInternalFrame implements ActionListener {
 		JTcode.setText("");
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JOptionPane boite_dialogue;
-		// TODO Auto-generated method stub
-		Object source = e.getSource();
-		if (source == JBajouterVisite) {
-			/*Visite uneVisite = new Visite(JTreference.getText(), JTdateVisite.getText(), JTcommentaire.getText(),
-					JTmatricule.getText(), JTcode.getText());*/
-			
-			String ref = JTreference.getText();
-			String dateV = JTdateVisite.getText();
-			String comm = JTcommentaire.getText();
-			String mat = JTmatricule.getText();
-			String code = JTcode.getText();
-			VisiteDao.ajouter(ref, dateV, comm, mat, code);
-			
-			if (VisiteDao.ajouter(ref, dateV, comm, mat, code) == 1) {
-				// Boîte du message d'information
-				//JOptionPane.showMessageDialog(null, "Votre ajout à bien été pris en compte !!!", "Information", JOptionPane.INFORMATION_MESSAGE);
-				
-				
-				JOptionPane.showMessageDialog(null, "Le matricule du Visiteur n'existe pas dans la base", "Information", JOptionPane.INFORMATION_MESSAGE);
-			}
-			
-			
-			
-			
-		}
-
-	}
 
 }

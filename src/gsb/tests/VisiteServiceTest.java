@@ -1,23 +1,22 @@
 package gsb.tests;
 
-import java.util.Date;
-
-import gsb.modele.Visite;
 import gsb.service.VisiteService;
-import gsb.modele.dao.*;
 
 public class VisiteServiceTest {
 	
 	
 	public static void main(String[] args) {
-		Visite uneVisite = VisiteService.rechercherVisite("v0001");
-		System.out.println(uneVisite.getReference());
-		System.out.println(uneVisite.getDateVisite());
-		System.out.println(uneVisite.getCommentaire());
 		
-		System.out.println(VisiteurDao.rechercher(uneVisite.getMatriculeVisit()).getNom());
-		System.out.println(MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille());
-		System.out.println(uneVisite.getCodeMed());
+		
+		//VisiteService.ajoutVisite("v0025", "12/12/2012 12:12:12", "VisiteDaoTest", "b13", "m009");
+		
+		VisiteService.rechercherVisite("v0001");
+		VisiteService.rechercherVisite("v0025");
+		VisiteService.rechercherVisite(null);
+		VisiteService.rechercherVisite("v0025");
+		
+		//VisiteService.supprimerVisite("v0040");
+		//VisiteService.supprimerVisite(null);
 		
 		
 
