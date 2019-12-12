@@ -51,11 +51,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 
 		setTitle("GSB");
-		setSize(500, 400);
+		setSize(600, 500);
 
 		// Ajout d'une barre de menus à la fenêtre
 		mbar = new JMenuBar();
-		mMedecins = new JMenu("Medecins");
+		mMedecins = new JMenu("Médecins");
 		JMenuItem mC1 = new JMenuItem("Consultation Medecin");
 		mC1.addActionListener(this); // installation d'un écouteur d'action
 		mMedecins.add(mC1);
@@ -63,13 +63,16 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mC2.addActionListener(this);
 		mMedecins.add(mC2);
 
-		mMedicaments = new JMenu("Medicaments");
+		mMedicaments = new JMenu("Médicaments");
 		JMenuItem mE1 = new JMenuItem("Consultation Medicament");
 		mE1.addActionListener(this); // installation d'un écouteur d'action
 		mMedicaments.add(mE1);
-		JMenuItem mE2 = new JMenuItem("Ajout Medicaments");
+		JMenuItem mE2 = new JMenuItem("Ajout Medicament");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
+		JMenuItem mE3 = new JMenuItem("Liste Medicaments");
+		mE3.addActionListener(this);
+		mMedicaments.add(mE3);
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
@@ -107,14 +110,18 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			
 			} else if (ChoixOption.equals("Ajout Medicament")) {
 				//ouvrirFenetre(new JIFMedecinListeDic(this));
-				ouvrirFenetre(new JIFMedecinListeCol(this));
+				ouvrirFenetre(new JIFMedicamentAjout());
+				
+			} else if (ChoixOption.equals("Liste Medicaments")) {
+				//ouvrirFenetre(new JIFMedecinListeDic(this));
+				ouvrirFenetre(new JIFMedicamentListeCol(this));
 				
 			} else if (ChoixOption.equals("Consultation Visite")) {
 				ouvrirFenetre(new JIFVisiteListe(this));
 				
 			} else if (ChoixOption.equals("Ajout Visite")) {
 				ouvrirFenetre(new JIFVisiteAjout());
-				
+			
 			}
 
 		}
@@ -129,7 +136,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		myJInternalFrame.setSize(500, 400);
+		myJInternalFrame.setSize(600, 500);
 		desktopPane.add(myJInternalFrame);
 	}
 

@@ -14,7 +14,7 @@ import junit.framework.TestCase;
  *
  */
 
-public class VisiteServiceTest extends TestCase {
+public class VisiteServiceTestUnit extends TestCase {
 
 	private VisiteService uneVisiteService;
 

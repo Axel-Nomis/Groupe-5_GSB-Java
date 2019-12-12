@@ -63,7 +63,7 @@ public class JIFVisiteAjout extends JIFVisite implements ActionListener {
 																				// un code d'erreur qui permettra
 																				// d'identifier l'erreur
 
-			switch (echo) { // les différentes erreur en fct de la valeur echo
+			switch (echo) { // messages des différentes erreur en fct de la valeur echo
 
 			case -1:
 				JOptionPane.showMessageDialog(null, "Vous avez oublié de référencer un ou plusieurs champ(s).",

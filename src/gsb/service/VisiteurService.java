@@ -3,20 +3,27 @@ package gsb.service;
 import gsb.modele.Visiteur;
 import gsb.modele.dao.VisiteurDao;
 
-/**
- * @author Isabelle 23 févr. 2015 TODO Pour changer le modèle de ce commentaire
- *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
- *         code - Modèles de code
- */
-public class VisiteurService {
+	/**
+	 * 
+	 * @author Marull
+	 *
+	 */
 
-	public static Visiteur rechercherVisite(String unMatricule) {
+public class VisiteurService {
+	
+	/**
+	 * 
+	 * @param unMatricule
+	 * @return
+	 */
+
+	public static Visiteur rechercherVisite(String unMatricule) { // cette fct gère les erreurs, quand on recherche un Visiteur par le matricule
 		Visiteur unVisiteur = null;
 		try {
-			if (unMatricule == null) {
+			if (unMatricule == null) {	// quand le matricule est null on affiche un message
 				throw new Exception("Donnée obligatoire : matricule");
 			}
-			unVisiteur = VisiteurDao.rechercher(unMatricule);
+			unVisiteur = VisiteurDao.rechercher(unMatricule);// sinon si elle est existe on execute la fct rechercher de la classe VisiteurDao
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

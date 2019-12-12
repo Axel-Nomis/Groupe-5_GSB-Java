@@ -34,10 +34,12 @@ public class ConnexionMySql { // DAO = Data Access Object
 	public static void connecterBd(){
 		//connexion à la base de donnée à partir de jdbc
 		//String url = "jdbc:mysql://192.175.1.13:3306/gsbV2"; // url : chaine de connexion
+		//String url = "jdbc:mysql://192.175.1.13:3306/BDD_java";
 		String url = "jdbc:mysql://localhost:3306/GSB_JAVA";
 		// try permet d'essayer de lancer la connexion
 		try {Class.forName("com.mysql.jdbc.Driver"); 
 			//cnx = DriverManager.getConnection(url,"admindb","password");
+			//cnx = DriverManager.getConnection(url,"adminsite","password");
 			cnx = DriverManager.getConnection(url,"root",""); 
 		} 
 		// si la connexion echoue un message d'erreur est affiché
@@ -57,7 +59,8 @@ public class ConnexionMySql { // DAO = Data Access Object
 				Statement requete = cnx.createStatement(); 
 				resultatReq =requete.executeQuery(laRequete); 
 		} 
-		catch(Exception e) {  System.out.println("Erreur requete : "+laRequete);  }
+		catch(Exception e) {  
+			System.out.println("Erreur requete : "+laRequete);  }
 		return resultatReq;	
 	}
 	
@@ -75,7 +78,22 @@ public class ConnexionMySql { // DAO = Data Access Object
         s.close();}
 		catch (Exception er) {
 			er.printStackTrace(); 
-			System.out.println("echec requête : "+laRequete); }
+			System.out.println("Echec requête : "+laRequete); }
+		return nbMaj;       
+	}
+	
+	
+	
+	public static int execReqDel(String laRequete){
+		connecterBd();
+		int nbMaj =0;
+		try {
+		Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        nbMaj = s.executeUpdate(laRequete);
+        s.close();}
+		catch (Exception er) {
+			er.printStackTrace(); 
+			System.out.println("Echec requête : "+laRequete); }
 		return nbMaj;       
 	}
 	
