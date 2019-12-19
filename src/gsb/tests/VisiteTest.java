@@ -53,7 +53,6 @@ public class VisiteTest {
 				VisiteDao.supprimer("v0030");
 				
 				
-				
 		System.out.println("");
 		System.out.println("");
 		

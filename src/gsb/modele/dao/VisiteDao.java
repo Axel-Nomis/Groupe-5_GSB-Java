@@ -151,5 +151,23 @@ public class VisiteDao {
 		}
 		return diccoDesVisites;
 	}
+	
+	public static ArrayList<Visite> retournerCollectionDesVisitesRefDate(String reference, String date) {
+		ArrayList<Visite> collectionDesVisites = new ArrayList<Visite>();
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE WHERE MATRICULE = '" + reference + "' AND DATEVISITE = '" + date + "'");
+		try {
+			while (reqSelection.next()) {
+				String reference2 = reqSelection.getString(1);
+				collectionDesVisites.add(VisiteDao.rechercher(reference2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return collectionDesVisites;
+	}
+	
+	
+	
+	
 
 }

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 	/**
@@ -26,15 +27,17 @@ public class JIFVisite extends JInternalFrame {
 	protected JPanel p;
 	protected JPanel pTexte;
 	protected JPanel oTexte;
+	protected JTable table;
 	
 	
 	protected JPanel pBoutons;
 	protected JPanel pSaisie;
+	
 	protected JButton JBajouterVisite;
 	protected JButton JBannulerVisite;
-	protected JButton JBafficherLigne;
+	protected JButton JBfiltrer;
 	protected JButton JBafficherFiche;
-	
+		
 
 	protected JLabel JLreference;
 	protected JLabel JLdateVisite;
@@ -42,6 +45,7 @@ public class JIFVisite extends JInternalFrame {
 	protected JLabel JLmatricule;
 	protected JLabel JLcode;
 
+	
 	protected JTextField JTreference;
 	protected JTextField JTdateVisite;
 	protected JTextField JTcommentaire;
@@ -59,7 +63,7 @@ public class JIFVisite extends JInternalFrame {
 
 		JLreference = new JLabel("Référence* :");			// initialisation des labels qui seront utilisés par les autres classe JIF
 		JLdateVisite = new JLabel("Date Visite* :");
-		JLcommentaire = new JLabel("Commentaire* :");
+		JLcommentaire = new JLabel("Commentaire :");
 		JLmatricule = new JLabel("Matricule visiteur* :");
 		JLcode = new JLabel("Code médecin* :");
 
@@ -73,7 +77,7 @@ public class JIFVisite extends JInternalFrame {
 		
 		JBajouterVisite = new JButton("Ajouter");			// initialisation des différents bouttons
 		JBannulerVisite = new JButton("Annuler");
-		JBafficherLigne = new JButton("Filtrer");
+		JBfiltrer = new JButton("Filtrer");
 		JBafficherFiche = new JButton("Visite détaillé");
 		
 		

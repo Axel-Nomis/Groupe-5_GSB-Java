@@ -15,10 +15,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 	/**
 	 * 
@@ -35,6 +38,7 @@ public class JIFVisiteListe extends JIFVisite implements ActionListener {
 	protected JScrollPane scrollPane;	
 	protected MenuPrincipal fenetreContainer;
 	protected JTable table;
+	protected DefaultTableModel model;
 
 	public JIFVisiteListe(MenuPrincipal uneFenetreContainer) {
 		super();
@@ -42,37 +46,43 @@ public class JIFVisiteListe extends JIFVisite implements ActionListener {
 		fenetreContainer = uneFenetreContainer;
 		setTitle("Listes des visites");
 		
-		lesVisites = VisiteDao.retournerCollectionDesVisites();
-
-		int nbLignes = lesVisites.size();
+		
+		
+		
 		
 		oTexte.add(JLmatricule);
 		oTexte.add(JTmatricule);
 		oTexte.add(JLdateVisite);
 		oTexte.add(JTdateVisite);
+		
+		
 		JTable table;
-
 		
-		
-		int i=0;
-		String[][] data = new String[nbLignes][3] ;
-		for(Visite uneVisite : lesVisites){
-			data[i][0] = uneVisite.getReference();
-			data[i][1] = uneVisite.getDateVisite();
-			data[i][2] = MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille();
-			i++;
-			}
 		String[] columnNames = {"Référence", "Code médecin", "Lieu"};
-		table = new JTable(data, columnNames);
+		model = new DefaultTableModel(columnNames,0);
+				
+		table = new JTable(model);
 		
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(475, 275));
 		p.add(scrollPane);
+		
+		
+		
+		JTreference = new JTextField(10);
+		JTreference.setMaximumSize(JTreference.getPreferredSize());
+		
+		
 
 		
 		JBafficherFiche.addActionListener(this); // source d'évenement
-		pBoutons.add(JBafficherFiche);		
+		JBfiltrer.addActionListener(this); // source d'évenement
+		
+		pBoutons.add(JLreference);
 		pBoutons.add(JTreference);
+		pBoutons.add(JBfiltrer);
+		pBoutons.add(JBafficherFiche);
+		
 		
 		p.add(pTexte);
 		p.add(pBoutons);
@@ -99,6 +109,23 @@ public class JIFVisiteListe extends JIFVisite implements ActionListener {
    	   			JOptionPane.showMessageDialog(null, "La visite est inexistante dans la base de données.", "Erreur", JOptionPane.ERROR_MESSAGE);
 				
    	   		}	
+		}
+		
+		else if (source == JBfiltrer) {
+			String reference = JTmatricule.getText().toString();
+			String date = JTdateVisite.getText().toString();
+			
+			ArrayList<Visite> testVisite = VisiteDao.retournerCollectionDesVisitesRefDate(reference, date);
+			System.out.println(testVisite.size());
+			for(Visite uneVisite : testVisite) {
+				String data[] = {uneVisite.getReference(), uneVisite.getCodeMed(), MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille()};
+				model.addRow(data);
+			}
+			
+            
+            
+            
+            
 		}
 	}
 }
