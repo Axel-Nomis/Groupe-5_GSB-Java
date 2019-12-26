@@ -23,11 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-	/**
-	 * 
-	 * @author Marull
-	 *
-	 */
+/**
+ * 
+ * @author Marull
+ *
+ */
 
 public class JIFVisiteListe extends JIFVisite implements ActionListener {
 
@@ -35,59 +35,47 @@ public class JIFVisiteListe extends JIFVisite implements ActionListener {
 
 	private ArrayList<Visite> lesVisites;
 
-	protected JScrollPane scrollPane;	
+	protected JScrollPane scrollPane;
 	protected MenuPrincipal fenetreContainer;
 	protected JTable table;
 	protected DefaultTableModel model;
 
 	public JIFVisiteListe(MenuPrincipal uneFenetreContainer) {
 		super();
-		
+
 		fenetreContainer = uneFenetreContainer;
 		setTitle("Listes des visites");
-		
-		
-		
-		
-		
+
 		oTexte.add(JLmatricule);
 		oTexte.add(JTmatricule);
 		oTexte.add(JLdateVisite);
 		oTexte.add(JTdateVisite);
-		
-		
+
 		JTable table;
-		
-		String[] columnNames = {"Référence", "Code médecin", "Lieu"};
-		model = new DefaultTableModel(columnNames,0);
-				
+
+		String[] columnNames = { "Référence", "Code médecin", "Lieu" };
+		model = new DefaultTableModel(columnNames, 0);
+
 		table = new JTable(model);
-		
+
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(475, 275));
 		p.add(scrollPane);
-		
-		
-		
+
 		JTreference = new JTextField(10);
 		JTreference.setMaximumSize(JTreference.getPreferredSize());
-		
-		
 
-		
 		JBafficherFiche.addActionListener(this); // source d'évenement
 		JBfiltrer.addActionListener(this); // source d'évenement
-		
+
 		pBoutons.add(JLreference);
 		pBoutons.add(JTreference);
 		pBoutons.add(JBfiltrer);
 		pBoutons.add(JBafficherFiche);
-		
-		
+
 		p.add(pTexte);
 		p.add(pBoutons);
 
-		
 	}
 
 	/*
@@ -102,30 +90,33 @@ public class JIFVisiteListe extends JIFVisite implements ActionListener {
 		if (source == JBafficherFiche) {
 			Visite uneVisite = VisiteDao.rechercher((JTreference.getText()));
 			if (uneVisite != null && VisiteDao.retournerDictionnaireDesVisites().containsKey(JTreference.getText())) {
-   	   				fenetreContainer.ouvrirFenetre(new JIFVisiteFiche(uneVisite));
-			}   	   				
-   	   		else {		
-   	   				
-   	   			JOptionPane.showMessageDialog(null, "La visite est inexistante dans la base de données.", "Erreur", JOptionPane.ERROR_MESSAGE);
-				
-   	   		}	
-		}
-		
-		else if (source == JBfiltrer) {
-			String reference = JTmatricule.getText().toString();
-			String date = JTdateVisite.getText().toString();
-			
-			ArrayList<Visite> testVisite = VisiteDao.retournerCollectionDesVisitesRefDate(reference, date);
-			System.out.println(testVisite.size());
-			for(Visite uneVisite : testVisite) {
-				String data[] = {uneVisite.getReference(), uneVisite.getCodeMed(), MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille()};
-				model.addRow(data);
+				fenetreContainer.ouvrirFenetre(new JIFVisiteFiche(uneVisite));
+			} else {
+
+				JOptionPane.showMessageDialog(null, "La visite est inexistante dans la base de données.", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+
 			}
-			
-            
-            
-            
-            
+		}
+
+		else if (source == JBfiltrer) {
+			String matricule = JTmatricule.getText().toString();
+			String date = JTdateVisite.getText().toString();
+
+			int echo = VisiteService.filtreTab(matricule, date);
+
+			if (echo == 0) {
+				ArrayList<Visite> testVisite = VisiteDao.retournerCollectionDesVisitesRefDate(matricule, date);
+				System.out.println(testVisite.size());
+				for (Visite uneVisite : testVisite) {
+					String data[] = { uneVisite.getReference(), uneVisite.getCodeMed(),
+							MedecinDao.rechercher(uneVisite.getCodeMed()).getLaLocalite().getVille() };
+					model.addRow(data);
+
+				}
+
+			}
+
 		}
 	}
 }

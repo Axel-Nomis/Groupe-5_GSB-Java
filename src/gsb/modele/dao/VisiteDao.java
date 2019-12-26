@@ -80,23 +80,12 @@ public class VisiteDao {
 	public static void ajouter(String reference, String dateVisite, String commentaire, String matriculeVisit,
 			String codeMed) {
 
-		SimpleDateFormat date_entree = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); // date entrée par l'utilisateur
-																					// pour simplifier la compréhension
-		SimpleDateFormat date_sql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // date convertie pour respecter le
-																					// format de la base de données
-		System.out.println("Date en entrée : " + dateVisite);
-		// 12/12/2012 12:12:12 ======> 2005-08-15 12:12:03
-		try {
-			Date date = date_entree.parse(dateVisite);
-			dateVisite = date_sql.format(date);
-			System.out.println("Date en sortie : " + date_sql.format(date));
-		} catch (Exception e) { // si la convertion ne marche pas
-			System.out.println("Error while parsing date");
-			e.printStackTrace();
-		}
+		
+		String dateparse = Visite.convertirDate(dateVisite);
+		// on converti la date avec la fonction convertirDate qui va convertir la date sous le format de la base de donnée
 
 		try {
-			String reqInsertion = "INSERT into VISITE values('" + reference + "','" + dateVisite + "','" + commentaire
+			String reqInsertion = "INSERT into VISITE values('" + reference + "','" + dateparse + "','" + commentaire
 					+ "','" + matriculeVisit + "','" + codeMed + "')";
 			// requête sql qui permet d'ajouter une Visite dans la base (les données entrées par l'utilisateur)
 			ConnexionMySql.execReqMaj(reqInsertion);
@@ -152,13 +141,15 @@ public class VisiteDao {
 		return diccoDesVisites;
 	}
 	
-	public static ArrayList<Visite> retournerCollectionDesVisitesRefDate(String reference, String date) {
+	public static ArrayList<Visite> retournerCollectionDesVisitesRefDate(String matricule, String date) {
+		
+		String dateparse = Visite.convertirDate(date);
 		ArrayList<Visite> collectionDesVisites = new ArrayList<Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE WHERE MATRICULE = '" + reference + "' AND DATEVISITE = '" + date + "'");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE WHERE MATRICULE = '" + matricule + "' AND DATEVISITE = '" + dateparse + "'");
 		try {
 			while (reqSelection.next()) {
-				String reference2 = reqSelection.getString(1);
-				collectionDesVisites.add(VisiteDao.rechercher(reference2));
+				String matricule2 = reqSelection.getString(1);
+				collectionDesVisites.add(VisiteDao.rechercher(matricule2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

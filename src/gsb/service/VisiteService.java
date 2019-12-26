@@ -3,6 +3,8 @@ package gsb.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import gsb.modele.Visite;
 import gsb.modele.dao.MedecinDao;
 import gsb.modele.dao.VisiteDao;
@@ -36,7 +38,8 @@ public class VisiteService {
 				throw new Exception("La visite est inexistante."); // quand la référence n'existe pas dans la base
 			}
 
-			uneVisite = VisiteDao.rechercher(uneReference); // sinon si elle est existe on execute la fct rechercher de la classe VisiteDao
+			uneVisite = VisiteDao.rechercher(uneReference); // sinon si elle est existe on execute la fct rechercher de
+															// la classe VisiteDao
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -140,8 +143,6 @@ public class VisiteService {
 				System.out.println("Le code du Médecin n'existe pas dans la base");
 				res = 8;
 
-			} else {
-				res = 1;
 			}
 		}
 		return res;
@@ -166,6 +167,48 @@ public class VisiteService {
 			System.out.println(e.getMessage());
 		}
 
+	}
+	
+	
+	
+
+	public static int filtreTab(String unMatricule, String uneDate) {
+
+		int res = 0;
+		try {
+			
+			if (unMatricule.length() == 0 || uneDate.length() == 0) { // on vérifie que uneRéférence à bien été entrée
+				// throw new Exception("Donnée obligatoire : référence");
+				JOptionPane.showMessageDialog(null, "Vous avez oublié de référencer un champs obligatoire", "Attention",
+						JOptionPane.WARNING_MESSAGE);
+				res = 1;
+			} else {
+				if (!VisiteurDao.retournerDictionnaireDesVisiteurs().containsKey(unMatricule)) {
+
+					JOptionPane.showMessageDialog(null, "Le matricule du visiteur n'existe pas dans la base", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+					res = -1;
+				}
+				
+				if (uneDate.length() == 19) {
+										
+					Visite.convertirDate(uneDate);
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Mauvais Format de la date !"
+							+ "Veuillez respecter ce format : JJ/MM/AAAA HH:MM:SS.", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+					res = 2;
+				}
+				
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
 	}
 
 }
