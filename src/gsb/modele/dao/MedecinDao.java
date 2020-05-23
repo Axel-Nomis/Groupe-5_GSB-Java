@@ -25,7 +25,7 @@ public class MedecinDao {
 		Medecin unMedecin = null;
 		Localite uneLocalite = null;
 		ResultSet reqSelection = ConnexionMySql
-				.execReqSelection("select * from MEDECIN where CODEMED ='" + codeMedecin + "'");
+				.execReqSelection("select * from C##GSBJAVAPROC.MEDECIN where CODEMED ='" + codeMedecin + "'");
 		try {
 			if (reqSelection.next()) {
 				uneLocalite = LocaliteDao.rechercher(reqSelection.getString(5));
@@ -45,7 +45,7 @@ public class MedecinDao {
 
 	public static ArrayList<Medecin> retournerCollectionDesMedecins() {
 		ArrayList<Medecin> collectionDesMedecins = new ArrayList<Medecin>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select CODEMED from MEDECIN");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select CODEMED from C##GSBJAVAPROC.MEDECIN");
 		try {
 			while (reqSelection.next()) {
 				String codeMedecin = reqSelection.getString(1);

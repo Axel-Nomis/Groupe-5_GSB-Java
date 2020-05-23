@@ -1,6 +1,7 @@
 package gsb.modele.dao;
 
 
+import java.sql.CallableStatement;
 /*
  * Créé le 23 sept. 2014
  *
@@ -10,7 +11,10 @@ package gsb.modele.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 /**
  * @author Isabelle
@@ -34,16 +38,52 @@ public class ConnexionMySql { // DAO = Data Access Object
 	public static void connecterBd(){
 		//connexion à la base de donnée à partir de jdbc
 		//String url = "jdbc:mysql://192.175.1.13:3306/gsbV2"; // url : chaine de connexion
-		String url = "jdbc:mysql://localhost:3306/gsbv2";
+		//String url = "jdbc:mysql://localhost:3306/gsbV2";
+		String url = "jdbc:oracle:thin:@192.168.56.107:1521:xe";
 		// try permet d'essayer de lancer la connexion
-		try {Class.forName("com.mysql.jdbc.Driver"); 
+		try {Class.forName("oracle.jdbc.driver.OracleDriver"); 
 			//cnx = DriverManager.getConnection(url,"admindb","password");
-			cnx = DriverManager.getConnection(url,"root",""); 
+			//cnx = DriverManager.getConnection(url,"root",""); 
+			cnx = DriverManager.getConnection(url,"SYSTEM","password");
+			/*String sql = "{call C##GSBJAVAPROC.PR_PODIUM(?, ?, ?)}";
+			CallableStatement call = cnx.prepareCall(sql);
+			
+			call.setString(1, "01/01/1999");
+			call.setString(2, "11/08/2010");
+			call.setInt(3, 3);			
+			call.execute();		*/	
+						
 		} 
 		// si la connexion echoue un message d'erreur est affiché
-        catch(Exception e) {  System.out.println("Echec lors de la connexion");  } 
+        catch(Exception e) {  
+        	System.out.println("Echec lors de la connexion");
+        	fermerConnexionBd();
+        	}
 
+	}	
+	
+	
+	public static void Proc(String dateentree, String datesortie){ 
+		connecterBd();
+		
+		try {				
+				String sql = "{call C##GSBJAVAPROC.PR_PODIUM(?, ?, ?)}";
+				CallableStatement call = cnx.prepareCall(sql);
+				
+				call.setString(1, "01/01/1999");
+				call.setString(2, "11/08/2010");
+				call.setInt(3, 3);			
+				call.execute();	
+				
+		} 
+		catch(Exception e) {  
+			System.out.println("Erreur requete : ");  
+			fermerConnexionBd();}
+			
 	}
+	
+	
+	
 	
 	/**
 	 * @param laRequete requête SQL de type SELECT

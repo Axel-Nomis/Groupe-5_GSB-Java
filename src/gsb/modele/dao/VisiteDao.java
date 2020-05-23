@@ -26,7 +26,7 @@ public class VisiteDao {
 		Visite uneVisite = null;
 
 		ResultSet reqSelection = ConnexionMySql
-				.execReqSelection("SELECT * from VISITE where Reference ='" + reference + "'");
+				.execReqSelection("SELECT * from C##GSBJAVAPROC.VISITE where Reference ='" + reference + "'");
 		// requete sql pour rechercher une Visite
 		try {
 			if (reqSelection.next()) {
@@ -53,7 +53,7 @@ public class VisiteDao {
 	public static void supprimer(String reference) {
 
 		try {
-			String reqDelete = "DELETE from VISITE where Reference ='" + reference + "'";
+			String reqDelete = "DELETE from C##GSBJAVAPROC.VISITE where Reference ='" + reference + "'";
 			// requete sql pour supprimer une Visite
 			ConnexionMySql.execReqDel(reqDelete);
 			System.out.println("La Visite à bien été supprimée !");
@@ -85,7 +85,7 @@ public class VisiteDao {
 		// on converti la date avec la fonction convertirDate qui va convertir la date sous le format de la base de donnée
 
 		try {
-			String reqInsertion = "INSERT into VISITE values('" + reference + "','" + dateparse + "','" + commentaire
+			String reqInsertion = "INSERT into C##GSBJAVAPROC.VISITE values('" + reference + "','" + dateparse + "','" + commentaire
 					+ "','" + matriculeVisit + "','" + codeMed + "')";
 			// requête sql qui permet d'ajouter une Visite dans la base (les données entrées par l'utilisateur)
 			ConnexionMySql.execReqMaj(reqInsertion);
@@ -93,7 +93,7 @@ public class VisiteDao {
 			// message en cas de réussite
 
 		} catch (Exception e) {
-			System.out.println("erreur reqInsertion pour la requête - INSERT into VISITE values('" + reference + "','"
+			System.out.println("erreur reqInsertion pour la requête - INSERT into C##GSBJAVAPROC.VISITE values('" + reference + "','"
 					+ dateVisite + "','" + commentaire + "','" + matriculeVisit + "','" + codeMed + "'");
 			e.printStackTrace();
 			// message en cas d'échec de la requête
@@ -108,7 +108,7 @@ public class VisiteDao {
 
 	public static ArrayList<Visite> retournerCollectionDesVisites() {
 		ArrayList<Visite> collectionDesVisites = new ArrayList<Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from C##GSBJAVAPROC.VISITE");
 		try {
 			while (reqSelection.next()) {
 				String reference = reqSelection.getString(1);
@@ -128,7 +128,7 @@ public class VisiteDao {
 
 	public static HashMap<String, Visite> retournerDictionnaireDesVisites() {
 		HashMap<String, Visite> diccoDesVisites = new HashMap<String, Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from C##GSBJAVAPROC.VISITE");
 		try {
 			while (reqSelection.next()) {
 				String reference = reqSelection.getString(1);
@@ -145,7 +145,7 @@ public class VisiteDao {
 		
 		String dateparse = Visite.convertirDate(date);
 		ArrayList<Visite> collectionDesVisites = new ArrayList<Visite>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE WHERE MATRICULE = '" + matricule + "' AND DATEVISITE = '" + dateparse + "'");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from C##GSBJAVAPROC.VISITE WHERE MATRICULE = '" + matricule + "' AND DATEVISITE = '" + dateparse + "'");
 		try {
 			while (reqSelection.next()) {
 				String matricule2 = reqSelection.getString(1);

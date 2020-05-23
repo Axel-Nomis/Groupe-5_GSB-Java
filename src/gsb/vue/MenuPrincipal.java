@@ -37,6 +37,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenu mMedecins;
 	protected JMenu mMedicaments;
 	protected JMenu mVisites;
+	protected JMenu mVisiteurs;
 
 	/**
 	 * 
@@ -82,10 +83,16 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
+		
+		mVisiteurs = new JMenu("Visiteurs");
+		JMenuItem mB1 = new JMenuItem("Palmarès des Visiteurs Médicaux");
+		mB1.addActionListener(this); // installation d'un écouteur d'action
+		mVisiteurs.add(mB1);
 
 		mbar.add(mMedecins);
 		mbar.add(mMedicaments);
 		mbar.add(mVisites);
+		mbar.add(mVisiteurs);
 		setJMenuBar(mbar);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,6 +129,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				
 			} else if (ChoixOption.equals("Ajout Visite")) {
 				ouvrirFenetre(new JIFVisiteAjout());
+			
+			} else if (ChoixOption.equals("Palmarès des Visiteurs Médicaux")) {
+				ouvrirFenetre(new JIFVisiteurPalmares(this));
 			
 			}
 

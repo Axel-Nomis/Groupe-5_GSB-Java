@@ -10,7 +10,7 @@ public class MedicamentDao {
 	public static Medicament rechercherMed(String depotLegal) {
 		Medicament unMedicament = null;
 		ResultSet reqSelection = ConnexionMySql
-				.execReqSelection("select * from MEDICAMENT where MED_DEPOTLEGAL ='" + depotLegal + "'");
+				.execReqSelection("select * from C##GSBJAVAPROC.MEDICAMENT where MED_DEPOTLEGAL ='" + depotLegal + "'");
 		try {
 			if (reqSelection.next()) {
 				unMedicament = new Medicament(reqSelection.getString(1), reqSelection.getString(2),
@@ -29,7 +29,7 @@ public class MedicamentDao {
 
 	public static ArrayList<Medicament> retournerCollectionDesMedicaments() {
 		ArrayList<Medicament> collectionDesMedicaments = new ArrayList<Medicament>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from MEDICAMENT");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from C##GSBJAVAPROC.MEDICAMENT");
 		try {
 			while (reqSelection.next()) {
 				String depotLegal = reqSelection.getString(1);
@@ -44,7 +44,7 @@ public class MedicamentDao {
 
 	public static HashMap<String, Medicament> retournerDictionnaireDesMedicaments() {
 		HashMap<String, Medicament> diccoDesMedicaments = new HashMap<String, Medicament>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from MEDICAMENT");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select MED_DEPOTLEGAL from C##GSBJAVAPROC.MEDICAMENT");
 		try {
 			while (reqSelection.next()) {
 				String depotLegal = reqSelection.getString(1);
@@ -84,7 +84,7 @@ public class MedicamentDao {
 		if (retour != -1 && retour != -2 && retour != -3) {
 			// On peut exécuter la requête si aucune des conditions précédentes n'a été
 			// bloqué
-			String requeteInsertion = "insert into STOCKER values(" + quantiteEntier + ",'" + matriculeVisiteur + "','"
+			String requeteInsertion = "insert into C##GSBJAVAPROC.STOCKER values(" + quantiteEntier + ",'" + matriculeVisiteur + "','"
 					+ medDepotLegal + "')";
 			retour = ConnexionMySql.execReqMaj(requeteInsertion);
 			if (retour == 0) {
